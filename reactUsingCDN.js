@@ -16,7 +16,7 @@ const sampleReactElement = React.createElement(
   {        //props
     id: "sample",
     className: "sample",
-    style: {
+    style: {     //we can also include style here
       color: "red",
       backgroundColor: "yellow",
     },
