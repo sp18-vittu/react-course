@@ -1,5 +1,5 @@
 // Using React
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root"));// by using createRoot, we tell where to include react elements, the root element, everything from react goes in here
 const heading = React.createElement(
   "h1",
   { id: "heading1" },
@@ -20,10 +20,11 @@ const sampleReactElement = React.createElement(
       color: "red",
       backgroundColor: "yellow",
     },
+    hello:"world",  // even this will be set as attribute of this h1 tag, cool? 😄
   },
   "Sample Text"  //content
 );
-console.log(sampleReactElement);
+// console.log(sampleReactElement);
 // root.render(sampleReactElement);
 
 
