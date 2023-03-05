@@ -1,0 +1,43 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.card {
+    width: 240px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 20px;
+    padding: 10px;
+    box-shadow: -1px 5px 10px 5px rgb(112 112 112 / 20%);
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.restaurant-img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.card h3 {
+    color: #353535;
+}
+
+.card h5 {
+    font-weight: lighter;
+}
+.card>h5{
+    padding: 2px 0px;
+}
+.card-info{
+    display: flex;
+    justify-content: space-between;
+    column-gap: 5px;
+    padding: 2px 0px;
+}
+.card-info>h5{
+font-weight: bold;
+}
