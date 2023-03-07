@@ -1,5 +1,5 @@
 import "./restaurantCard.css";
-
+import { CARD_IMG_CDN_URL } from "../../constants";
 function RestaurantCard({
   cloudinaryImageId,
   name,
@@ -13,18 +13,15 @@ function RestaurantCard({
     <div className="card">
       <img
         className="restaurant-img"
-        src={
-          "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" +
-          cloudinaryImageId
-        }
+        src={CARD_IMG_CDN_URL + cloudinaryImageId}
       />
       <h3>{name}</h3>
       <h5>{cuisines.join(", ")}</h5>
       <h5>{area}</h5>
       <div className="card-info">
-      <h5>{avgRating}</h5>
-      <h5>{lastMileTravelString}</h5>
-      <h5>{costForTwoString}</h5>
+        <h5>{avgRating}</h5>
+        <h5>{lastMileTravelString}</h5>
+        <h5>{costForTwoString}</h5>
       </div>
     </div>
   );
