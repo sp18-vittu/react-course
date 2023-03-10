@@ -18,6 +18,9 @@
   padding: 0 10px;
   background-color: white;
   box-shadow: -1px 5px 10px 5px #70707033;
+  font-weight: bold;
+  font-size: larger;
+  color: #545454;
 }
 
 .header > ul {

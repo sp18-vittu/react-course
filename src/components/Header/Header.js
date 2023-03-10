@@ -4,7 +4,7 @@ import { LOGO_URL } from "../../constants";
 
 export const Logo = () => {
   return (
-    <a>
+    <a href="/">
       <img className="logo-img" src={LOGO_URL} alt="Food Villa" />
     </a>
   );
@@ -15,7 +15,7 @@ const Header = function () {
     <div className="header-fixed">
       <div className="header">
         <Logo />
-        {/* <Tem p /> */}
+        {/* <Temp /> */}
         <ul>
           <li>Home</li>
           <li>About</li>

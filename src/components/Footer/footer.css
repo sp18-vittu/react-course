@@ -4,6 +4,26 @@
   box-sizing: border-box;
 }
 .footer {
-  /* position: absolute;
-  bottom: 0; */
+  width: 100%;
+  margin: 10px;
+  background-color: white;
+  text-align: center;
+  padding: 20px 10px;
+  border-radius: 5px;
+  box-shadow: -1px 4px 20px 14px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 9999;
+}
+.footer > strong {
+  padding-left: 5px;
+  color: rgb(203, 54, 0);
+}
+.footer > a {
+  color: #070062;
+  font-weight: 700;
+  padding: 0 5px;
+  text-decoration: none;
 }

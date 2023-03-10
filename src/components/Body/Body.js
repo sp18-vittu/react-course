@@ -1,31 +1,43 @@
-import { useState } from "react";
-import { restaurantList } from "../../constants";
+import { useState, useEffect } from "react";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import "./body.css";
-
-const debounce = function (fn, delay) {
-  let timer;
-  return function (...filterArgs) {
-    clearTimeout(timer);
-    timer = setTimeout(() => fn(...filterArgs), delay);
-  };
-};
+import { SWIGGY_API_URL } from "../../constants";
+import Shimmer from "../Shimmer/Shimmer";
 
 function Body() {
   const [searchText, setSearchText] = useState("");
-  const [restaurants, setRestaurants] = useState(restaurantList);
+  const [allRestaurants, setAllRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+
+  async function getRestaurantsFromAPI() {
+    const data = await fetch(SWIGGY_API_URL);
+    const json = await data.json();
+    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+  }
+  useEffect(() => {
+    getRestaurantsFromAPI();
+  }, []);
+
+  const debounce = function (fn, delay) {
+    let timer;
+    return function (...filterArgs) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn(...filterArgs), delay);
+    };
+  };
 
   const filterData = (searchedText, searchLocation) => {
-    setRestaurants(
+    setFilteredRestaurants(
       searchLocation.filter((restaurant) =>
-        restaurant.data.data.name
-          .toLowerCase()
-          .includes(searchedText.toLowerCase())
+        restaurant?.data?.name
+          ?.toLowerCase()
+          ?.includes(searchedText?.toLowerCase())
       )
     );
   };
 
-  const debouncedSearch = debounce(filterData, 00);
+  const debouncedSearch = debounce(filterData, 100);
 
   const SearchedRestaurantNotFound = ({ searchedText }) => {
     return (
@@ -39,6 +51,7 @@ function Body() {
       </h3>
     );
   };
+  if (!allRestaurants) return null;
   return (
     <>
       <div className="search-container">
@@ -50,7 +63,7 @@ function Body() {
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
-          onKeyUp={() => debouncedSearch(searchText, restaurantList)}
+          onKeyUp={() => debouncedSearch(searchText, allRestaurants)}
         />
         <button
           className="search-btn"
@@ -64,20 +77,24 @@ function Body() {
           Search
         </button>
       </div>
-      <div className="restaurant-list">
-        {restaurants.length === 0 ? (
-          <SearchedRestaurantNotFound searchedText={searchText} />
-        ) : (
-          restaurants.map((restaurant) => {
-            return (
-              <RestaurantCard
-                key={restaurant.data.data.uuid}
-                {...restaurant.data.data}
-              />
-            );
-          })
-        )}
-      </div>
+      {allRestaurants?.length === 0 ? (
+        <Shimmer />
+      ) : (
+        <div className="restaurant-list">
+          {filteredRestaurants.length === 0 ? (
+            <SearchedRestaurantNotFound searchedText={searchText} />
+          ) : (
+            filteredRestaurants.map((restaurant) => {
+              return (
+                <RestaurantCard
+                  key={restaurant.data.uuid}
+                  {...restaurant.data}
+                />
+              );
+            })
+          )}
+        </div>
+      )}
     </>
   );
 }
