@@ -25,14 +25,20 @@ function Body() {
     );
   };
 
-  const betterSearchFunction = debounce(filterData, 400);
+  const debouncedSearch = debounce(filterData, 00);
 
-  const NotFound = ({ searchedText }) => {
+  const SearchedRestaurantNotFound = ({ searchedText }) => {
     return (
-      <h3>Sorry, we couldn't find any restaurant named "{searchedText}" </h3>
+      <h3>
+        {`Sorry, we couldn't find any restaurant named "` +
+          (searchedText.length > 13
+            ? `${searchedText.slice(0, 8)}....${searchedText.slice(
+                searchedText.length - 5
+              )}"`
+            : `${searchedText}"`)}
+      </h3>
     );
   };
-
   return (
     <>
       <div className="search-container">
@@ -44,7 +50,7 @@ function Body() {
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
-          onKeyUp={() => betterSearchFunction(searchText, restaurantList)}
+          onKeyUp={() => debouncedSearch(searchText, restaurantList)}
         />
         <button
           className="search-btn"
@@ -60,7 +66,7 @@ function Body() {
       </div>
       <div className="restaurant-list">
         {restaurants.length === 0 ? (
-          <NotFound searchedText={searchText} />
+          <SearchedRestaurantNotFound searchedText={searchText} />
         ) : (
           restaurants.map((restaurant) => {
             return (
