@@ -30,12 +30,12 @@ function Body() {
   const SearchedRestaurantNotFound = ({ searchedText }) => {
     return (
       <h3>
-        {`Sorry, we couldn't find any restaurant named "` +
+        {`Sorry, we couldn't find any restaurant named " ` +
           (searchedText.length > 13
             ? `${searchedText.slice(0, 8)}....${searchedText.slice(
                 searchedText.length - 5
               )}"`
-            : `${searchedText}"`)}
+            : `${searchedText} "`)}
       </h3>
     );
   };
