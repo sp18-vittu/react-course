@@ -1,11 +1,14 @@
+export const locationLatitude = 28.544869;
+export const locationLongitude = 77.128134;
+
 export const CARD_IMG_CDN_URL =
   "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
+
 export const LOGO_URL =
   "https://yt3.googleusercontent.com/ytc/AL5GRJXudT76175T4x4n7eslWM1YkgNLHDSSqfXGoadl=s900-c-k-c0x00ffffff-no-rj";
 
-export const SWIGGY_API_URL =
-  "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.549291&lng=77.26781369999999&page_type=DESKTOP_WEB_LISTING";
-
+export const SWIGGY_API_URL = (latitude, longitude) =>
+  `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${latitude}&lng=${longitude}&page_type=DESKTOP_WEB_LISTING`;
 export const shimmer_card_unit = 15;
 
 // sample hardcoded restaurant data

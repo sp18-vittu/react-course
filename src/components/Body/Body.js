@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import "./body.css";
-import { SWIGGY_API_URL } from "../../constants";
+import {
+  SWIGGY_API_URL,
+  locationLatitude,
+  locationLongitude,
+} from "../../constants";
 import Shimmer from "../Shimmer/Shimmer";
 
 function Body() {
@@ -9,14 +13,21 @@ function Body() {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
-  async function getRestaurantsFromAPI() {
-    const data = await fetch(SWIGGY_API_URL);
-    const json = await data.json();
-    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+  async function getRestaurantsFromAPI(lat, long) {
+    try {
+      const data = await fetch(SWIGGY_API_URL(lat, long));
+      const json = await data.json();
+      const allRestaurantsCards = json?.data?.cards.filter(
+        (el) => el.cardType === "seeAllRestaurants"
+      )[0]?.data?.data?.cards;
+      setAllRestaurants(allRestaurantsCards);
+      setFilteredRestaurants(allRestaurantsCards);
+    } catch (e) {
+      console.log(e);
+    }
   }
   useEffect(() => {
-    getRestaurantsFromAPI();
+    getRestaurantsFromAPI(locationLatitude, locationLongitude);
   }, []);
 
   const debounce = function (fn, delay) {
