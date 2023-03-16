@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./header.css";
 import { LOGO_URL } from "../../constants";
-
+import { Link } from "react-router-dom";
+import HeaderLogo from "../../assets/images/Logo.jpeg";
 export const Logo = () => {
   return (
-    <a href="/">
-      <img className="logo-img" src={LOGO_URL} alt="Food Villa" />
-    </a>
+    <Link to="/">
+      <img className="logo-img" src={HeaderLogo} alt="Food Villa" />
+    </Link>
   );
 };
 
@@ -17,9 +18,15 @@ const Header = function () {
         <Logo />
         {/* <Temp /> */}
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
           <li>Cart</li>
         </ul>
       </div>

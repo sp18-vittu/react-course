@@ -1,5 +1,6 @@
 import "./restaurantCard.css";
 import { CARD_IMG_CDN_URL } from "../../constants";
+
 function RestaurantCard({
   cloudinaryImageId,
   name,

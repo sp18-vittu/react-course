@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
+import { Link } from "react-router-dom";
 import "./body.css";
 import {
   SWIGGY_API_URL,
@@ -7,6 +8,7 @@ import {
   locationLongitude,
 } from "../../constants";
 import Shimmer from "../Shimmer/Shimmer";
+import Error from "../Error/Error";
 
 function Body() {
   const [searchText, setSearchText] = useState("");
@@ -97,10 +99,12 @@ function Body() {
           ) : (
             filteredRestaurants.map((restaurant) => {
               return (
-                <RestaurantCard
+                <Link
+                  to={"/restaurant/" + restaurant.data.id}
                   key={restaurant.data.uuid}
-                  {...restaurant.data}
-                />
+                >
+                  <RestaurantCard {...restaurant.data} />
+                </Link>
               );
             })
           )}

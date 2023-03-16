@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 .footer {
-  width: 100%;
   margin: 10px;
   background-color: white;
   text-align: center;
@@ -14,7 +13,6 @@
   position: sticky;
   left: 0;
   bottom: 0;
-  width: 100%;
   z-index: 9999;
 }
 .footer > strong {
