@@ -6,7 +6,7 @@
 }
 
 .card {
-  width: 240px;
+  width: 250px;
   cursor: pointer;
   border-radius: 5px;
   margin: 20px;
@@ -20,7 +20,7 @@
   transform: scale(1.03);
 }
 
-.restaurant-img {
+.restaurant-card-img {
   width: 100%;
   border-radius: 10px;
 }
@@ -43,4 +43,12 @@
 }
 .card-info > h5 {
   font-weight: bold;
+}
+.restaurant-card-rating {
+  display: flex;
+  align-items: center;
+  padding: 5px 8px;
+  gap: 5px;
+  background-color: #016034;
+  border-radius: 5px;
 }

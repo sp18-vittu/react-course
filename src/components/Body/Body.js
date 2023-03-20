@@ -3,7 +3,7 @@ import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import { Link } from "react-router-dom";
 import "./body.css";
 import {
-  SWIGGY_API_URL,
+  SWIGGY_CARDS_API_URL,
   locationLatitude,
   locationLongitude,
 } from "../../constants";
@@ -17,7 +17,7 @@ function Body() {
 
   async function getRestaurantsFromAPI(lat, long) {
     try {
-      const data = await fetch(SWIGGY_API_URL(lat, long));
+      const data = await fetch(SWIGGY_CARDS_API_URL(lat, long));
       const json = await data.json();
       const allRestaurantsCards = json?.data?.cards.filter(
         (el) => el.cardType === "seeAllRestaurants"

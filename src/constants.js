@@ -1,5 +1,5 @@
-export const locationLatitude = 28.548782;
-export const locationLongitude = 77.267632;
+export const locationLatitude = 21.1702401;
+export const locationLongitude = 72.83106070000001;
 
 export const CARD_IMG_CDN_URL =
   "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
@@ -7,9 +7,22 @@ export const CARD_IMG_CDN_URL =
 export const LOGO_URL =
   "https://yt3.googleusercontent.com/ytc/AL5GRJXudT76175T4x4n7eslWM1YkgNLHDSSqfXGoadl=s900-c-k-c0x00ffffff-no-rj";
 
-export const SWIGGY_API_URL = (latitude, longitude) =>
+export const SWIGGY_CARDS_API_URL = (latitude, longitude) =>
   `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${latitude}&lng=${longitude}&page_type=DESKTOP_WEB_LISTING`;
 export const shimmer_card_unit = 15;
+
+// menu items api card type key
+export const MENU_ITEM_TYPE_KEY =
+  "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory";
+
+export const RESTAURANT_TYPE_KEY =
+  "type.googleapis.com/swiggy.presentation.food.v2.Restaurant";
+
+export const MENU_ITEM_IMG_CDN_URL =
+  "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/";
+
+export const SWIGGY_MENU_API_URL = (latitude, longitude) =>
+  `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${latitude}&lng=${longitude}&&submitAction=ENTER&restaurantId=`;
 
 // sample hardcoded restaurant data
 /*
