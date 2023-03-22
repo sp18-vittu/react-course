@@ -103,26 +103,26 @@ const RestaurantMenu = () => {
             <p className="menu-count">{menuItems.length} ITEMS</p>
           </div>
           <div className="menu-items-list">
-            {menuItems.map((item) => (
-              <div className="menu-item" key={item?.id}>
+            {menuItems.map((menu_item) => (
+              <div className="menu-item" key={menu_item?.id}>
                 <div className="menu-item-details">
-                  <h3 className="item-title">{item?.name}</h3>
+                  <h3 className="item-title">{menu_item?.name}</h3>
                   <p className="item-cost">
-                    {item?.price > 0
+                    {menu_item?.price > 0
                       ? new Intl.NumberFormat("en-IN", {
                           style: "currency",
                           currency: "INR",
-                        }).format(item?.price / 100)
+                        }).format(menu_item?.price / 100)
                       : " "}
                   </p>
-                  <p className="item-desc">{item?.description}</p>
+                  <p className="item-desc">{menu_item?.description}</p>
                 </div>
                 <div className="menu-img-wrapper">
-                  {item?.imageId && (
+                  {menu_item?.imageId && (
                     <img
                       className="menu-item-img"
-                      src={MENU_ITEM_IMG_CDN_URL + item?.imageId}
-                      alt={item?.name}
+                      src={MENU_ITEM_IMG_CDN_URL + menu_item?.imageId}
+                      alt={menu_item?.name}
                     />
                   )}
                   <button className="add-btn"> ADD +</button>
