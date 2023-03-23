@@ -1,5 +1,5 @@
-export const locationLatitude = 28.544869;
-export const locationLongitude = 77.128134;
+export const locationLatitude = 28.54869;
+export const locationLongitude = 77.12134;
 
 export const CARD_IMG_CDN_URL =
   "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";

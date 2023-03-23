@@ -35,6 +35,16 @@ class ProfileClass extends React.Component {
         >
           Increment
         </button>
+        <button
+          onClick={() => {
+            this.setState({
+              count: this.state.count - 1,
+              count2: this.state.count2 - 1,
+            });
+          }}
+        >
+          Decrement
+        </button>
       </div>
     );
   }
