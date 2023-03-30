@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./header.css";
 import { LOGO_URL } from "../../constants";
 import { Link } from "react-router-dom";
 import HeaderLogo from "../../assets/images/Logo.jpeg";
+import useOnline from "../../utils/useOnline";
+import Usercontext from "../../utils/UserContext";
 export const Logo = () => {
   return (
     <Link to="/">
@@ -12,6 +14,8 @@ export const Logo = () => {
 };
 
 const Header = function () {
+  const isOnline = useOnline();
+  const { user } = useContext(Usercontext);
   return (
     <div className="header-fixed">
       <div className="header">
@@ -28,6 +32,8 @@ const Header = function () {
             <Link to="/contact">Contact</Link>
           </li>
           <li>Cart</li>
+          <li>{user.name}</li>
+          <li>{isOnline ? "✅" : "🔴"}</li>
         </ul>
       </div>
     </div>

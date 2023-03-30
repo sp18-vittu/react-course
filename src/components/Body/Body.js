@@ -1,69 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import { Link } from "react-router-dom";
 import "./body.css";
-import {
-  SWIGGY_CARDS_API_URL,
-  locationLatitude,
-  locationLongitude,
-} from "../../constants";
+import { locationLatitude, locationLongitude } from "../../constants";
 import Shimmer from "../Shimmer/Shimmer";
-import Error from "../Error/Error";
+import UserContext from "../../utils/UserContext";
+import {
+  debounce,
+  getRestaurantsFromAPI,
+  filterRestaurantData,
+} from "../../utils/helper";
+import SearchedRestaurantNotFound from "../SearchedRestaurantNotFound/SearchedRestaurantNotFound";
 
 function Body() {
   const [searchText, setSearchText] = useState("");
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const { user, setUser } = useContext(UserContext);
 
-  async function getRestaurantsFromAPI(lat, long) {
-    try {
-      const data = await fetch(SWIGGY_CARDS_API_URL(lat, long));
-      const json = await data.json();
-      const allRestaurantsCards = json?.data?.cards.filter(
-        (el) => el.cardType === "seeAllRestaurants"
-      )[0]?.data?.data?.cards;
-      setAllRestaurants(allRestaurantsCards);
-      setFilteredRestaurants(allRestaurantsCards);
-    } catch (e) {
-      console.log(e);
-    }
-  }
   useEffect(() => {
-    getRestaurantsFromAPI(locationLatitude, locationLongitude);
+    getRestaurantsFromAPI(
+      locationLatitude,
+      locationLongitude,
+      setAllRestaurants,
+      setFilteredRestaurants
+    );
   }, []);
 
-  const debounce = function (fn, delay) {
-    let timer;
-    return function (...filterArgs) {
-      clearTimeout(timer);
-      timer = setTimeout(() => fn(...filterArgs), delay);
-    };
-  };
-
-  const filterData = (searchedText, searchLocation) => {
-    setFilteredRestaurants(
-      searchLocation.filter((restaurant) =>
-        restaurant?.data?.name
-          ?.toLowerCase()
-          ?.includes(searchedText?.toLowerCase())
-      )
-    );
-  };
-
-  const debouncedSearch = debounce(filterData, 100);
-
-  const SearchedRestaurantNotFound = ({ searchedText }) => {
-    return (
-      <h3 style={{ height: "63vh" }}>
-        {`Sorry, we couldn't find any restaurant named " ` +
-          (searchedText.length > 13
-            ? `${searchedText.slice(0, 8)}....${searchedText.slice(
-                searchedText.length - 5
-              )}"`
-            : `${searchedText} "`)}
-      </h3>
-    );
-  };
   if (!allRestaurants) return null;
   return (
     <>
@@ -76,7 +39,37 @@ function Body() {
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
-          onKeyUp={() => debouncedSearch(searchText, allRestaurants)}
+          onKeyUp={() =>
+            debounce(filterRestaurantData)(
+              searchText,
+              allRestaurants,
+              setFilteredRestaurants
+            )
+          }
+        />
+        <input
+          style={{
+            padding: "15px",
+            margin: "30px 10px 0px",
+            borderRadius: "5px",
+            border: "1px solid #aabcca",
+          }}
+          value={user.name}
+          onChange={(e) => {
+            setUser({ ...user, name: e.target.value });
+          }}
+        />
+        <input
+          style={{
+            padding: "15px",
+            margin: "30px 10px 0px",
+            borderRadius: "5px",
+            border: "1px solid #aabcca",
+          }}
+          value={user.email}
+          onChange={(e) => {
+            setUser({ ...user, email: e.target.value });
+          }}
         />
         <button
           className="search-btn"

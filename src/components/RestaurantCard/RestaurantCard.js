@@ -1,6 +1,8 @@
 import "./restaurantCard.css";
 import { CARD_IMG_CDN_URL } from "../../constants";
 import RatingStar from "../../assets/images/starRating.svg";
+import { useContext } from "react";
+import UserContext from "../../utils/UserContext";
 function RestaurantCard({
   cloudinaryImageId,
   name,
@@ -10,6 +12,7 @@ function RestaurantCard({
   costForTwoString,
   avgRating,
 }) {
+  const { user } = useContext(UserContext);
   return (
     <div className="card">
       <img
@@ -37,6 +40,8 @@ function RestaurantCard({
         <h5>{lastMileTravelString}</h5>
         <h5>{costForTwoString}</h5>
       </div>
+      <p>{user.name}</p>
+      <p>{user.email}</p>
     </div>
   );
 }

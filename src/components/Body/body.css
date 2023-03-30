@@ -9,6 +9,7 @@
   justify-content: center;
   flex-wrap: wrap;
   padding: 20px;
+  min-height: 64vh;
 }
 .search-container {
   display: flex;
